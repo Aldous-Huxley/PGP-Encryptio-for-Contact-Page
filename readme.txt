@@ -18,7 +18,6 @@ This plugin enables PGP encryption for a built in contact form on your WordPress
 
 Key Features:
 * Simple shortcode-based contact form: `[pgp_contact_form]`
-* Tested with Contact Form 7 (Unsupported)
 * Display your public key: `[pgp_public_key]`
 * Admin settings for configuring your PGP public key and recipient email
 * AJAX-powered form submission for seamless user experience
