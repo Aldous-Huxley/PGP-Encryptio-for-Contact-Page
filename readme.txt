@@ -9,11 +9,11 @@ Stable tag: 1.0.0
 License: Apache License 2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Adds PGP encryption to WordPress contact forms, allowing secure email communication with public key encryption.
+Adds PGP encryption to a built-in WordPress contact form, allowing secure email communication with public key encryption.
 
 == Description ==
 
-This plugin enables PGP encryption for contact forms on your WordPress site, ensuring that messages sent via the form are encrypted using your public key before being emailed to you. It's ideal for maintaining privacy and security in user communications.
+This plugin enables PGP encryption for a built in contact form on your WordPress site, ensuring that messages sent via the form are encrypted using your public key before being emailed to you. It's ideal for maintaining privacy and security in user communications.
 
 Key Features:
 * Simple shortcode-based contact form: `[pgp_contact_form]`
