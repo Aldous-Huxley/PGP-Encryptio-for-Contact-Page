@@ -20,6 +20,7 @@ Key Features:
 * Simple shortcode-based contact form: `[pgp_contact_form]`
 * Display your public key: `[pgp_public_key]`
 * Admin settings for configuring your PGP public key and recipient email
+* Allows for alternative "WordPress admin login obfuscation" or "custom login URL" optionally availiable in the admin settings for proper integration.
 * AJAX-powered form submission for seamless user experience
 * Responsive, styled form that integrates with your theme
 * Uses the secure GnuPG PHP extension for encryption (requires server support)
