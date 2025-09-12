@@ -8,7 +8,7 @@
  * License: GPL-2.0
  * Description: Adds PGP encryption to WordPress contact forms, allowing secure email communication with public key encryption. <strong>Like this plugin? Please <a href="https://www.paypal.com/donate/?business=CAA8EG3Z7MDHL&no_recurring=0&item_name=Wordpress+plugin+-+PGP+Encryption+for+Contact+Page.&currency_code=USD" title="Send a donation to the developer of WP PGP Encrypted Emails">donate</a>. &hearts; Thank you!</strong>
  * Donate
- * License: GPL-2.0
+ * License: Apache License 2.0
  * Text Domain: pgp-encryption-for-contact-page
  */
 
