@@ -41,13 +41,13 @@ Note: Your server must have the GnuPG PHP extension enabled. Check with your hos
 
 = What are the server requirements for this plugin to run?
 
-This plugin requires the following PHP extension to be enabled on your webserver: gnupg, json, mbstring, openssl.
+This plugin requires the following PHP extensions to be enabled on your webserver: gnupg, json, mbstring, openssl.
 
 = How do I impliment this contact form? 1. Setup the plugin in your Wordpress admin panel. 2. Use the shortcode: [pgp_contact_form] to embed a responsive, styled form on any page or post.
 
 = Does this plugin work with any contact form plugin? =
 
-Yes, but unsupported. This is a standalone contact form. It worked with Contact Form 7 providing encryption for a sent form on Contact 7. For other custom integration, advanced users can extend the `PGP_ECP_Frontend` class.
+Maybe, but unsupported. This is a standalone contact form. It worked with Contact Form 7 providing encryption for a sent form on Contact 7. For other custom integration, advanced users can extend the `PGP_ECP_Frontend` class.
 
 = What if the GnuPG extension is not available? =
 
