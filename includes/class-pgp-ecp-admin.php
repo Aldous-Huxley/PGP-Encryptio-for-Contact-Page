@@ -1,6 +1,6 @@
 <?php
 // File: class-pgp-ecp-admin.php
-// Path: PGP-Encryption-for-Contact-Page/includes/class-pgp-ecp-admin.php
+// Path: PGP-Encryption-for-Contact-Page/includes/
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -138,9 +138,9 @@ class PGP_ECP_Admin {
      */
     public function render_public_key_field() {
         $options = get_option('pgp_ecp_options', []);
-        $value = esc_textarea($options['pgp_public_key'] ?? '');
+        $value = $options['pgp_public_key'] ?? '';
         ?>
-        <textarea name="pgp_ecp_options[pgp_public_key]" rows="10" cols="50"><?php echo $value; ?></textarea>
+        <textarea name="pgp_ecp_options[pgp_public_key]" rows="10" cols="50"><?php echo esc_textarea($value); ?></textarea>
         <p class="description">Paste your armored PGP public key here (e.g., starts with "-----BEGIN PGP PUBLIC KEY BLOCK-----"). Generate one using <code>gpg --gen-key</code> and export with <code>gpg --armor --export your-email@domain.com</code>.</p>
         <?php
     }
@@ -150,9 +150,9 @@ class PGP_ECP_Admin {
      */
     public function render_recipient_email_field() {
         $options = get_option('pgp_ecp_options', []);
-        $value = esc_attr($options['pgp_recipient_email'] ?? '');
+        $value = $options['pgp_recipient_email'] ?? '';
         ?>
-        <input type="email" name="pgp_ecp_options[pgp_recipient_email]" value="<?php echo $value; ?>" />
+        <input type="email" name="pgp_ecp_options[pgp_recipient_email]" value="<?php echo esc_attr($value); ?>" />
         <p class="description">The email address where encrypted messages will be sent (e.g., your-email@domain.com).</p>
         <?php
     }
@@ -162,10 +162,11 @@ class PGP_ECP_Admin {
      */
     public function render_admin_url_field() {
         $options = get_option('pgp_ecp_options', []);
-        $value = esc_attr($options['pgp_admin_url'] ?? '');
+        $value = $options['pgp_admin_url'] ?? '';
         ?>
-        <input type="url" name="pgp_ecp_options[pgp_admin_url]" value="<?php echo $value; ?>" style="width: 100%; max-width: 400px;" />
+        <input type="url" name="pgp_ecp_options[pgp_admin_url]" value="<?php echo esc_attr($value); ?>" style="width: 100%; max-width: 400px;" />
         <p class="description">Enter the custom admin URL if your WordPress admin panel is not at /wp-admin (e.g., https://example.com/custom-admin). Leave blank to use the default admin URL.</p>
         <?php
     }
 }
+?>
