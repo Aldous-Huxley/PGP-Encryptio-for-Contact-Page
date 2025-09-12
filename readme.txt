@@ -1,0 +1,69 @@
+=== PGP Encryption for Contact Page ===
+Contributors: Robert Stanghellini
+Tags: pgp, encryption, contact form, security, email
+Requires at least: 6.0
+Tested up to: 6.6
+Requires PHP: 8.2
+Stable tag: 1.0.0
+License: Apache License 2.0
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Adds PGP encryption to WordPress contact forms, allowing secure email communication with public key encryption.
+
+== Description ==
+
+This plugin enables PGP encryption for contact forms on your WordPress site, ensuring that messages sent via the form are encrypted using your public key before being emailed to you. It's ideal for maintaining privacy and security in user communications.
+
+Key Features:
+* Simple shortcode-based contact form: `[pgp_contact_form]`
+* Tested with Contact Form 7
+* Display your public key: `[pgp_public_key]`
+* Admin settings for configuring your PGP public key and recipient email
+* AJAX-powered form submission for seamless user experience
+* Responsive, styled form that integrates with your theme
+* Uses the secure GnuPG PHP extension for encryption (requires server support)
+
+Once installed, configure the plugin in Settings > PGP Encryption, then add the shortcodes to any page or post.
+
+== Installation ==
+
+1. Upload the `PGP-Encryption-for-Contact-Page` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Go to Settings > PGP Encryption and paste your armored PGP public key (starting with "BEGIN PGP PUBLIC KEY BLOCK") and set the recipient email.
+4. Add the shortcode `[pgp_contact_form]` to a page or post to display the encrypted contact form.
+5. Optionally, add `[pgp_public_key]` to show your public key for users.
+
+Note: Your server must have the GnuPG PHP extension enabled. Check with your host if encryption fails.
+
+== Frequently Asked Questions ==
+
+= Does this plugin work with any contact form plugin? =
+
+Yes, this is a standalone contact form. It does integrate with Contact Form 7. For other custom integration, advanced users can extend the `PGP_ECP_Frontend` class.
+
+= What if the GnuPG extension is not available? =
+
+The plugin will log errors and disable encryption. Contact your hosting provider to enable the `gnupg` PHP extension.
+
+= How do I get a PGP public key? =
+
+Generate one using tools like GnuPG (gpg --gen-key) or online services like Protonmail, then export it in armored format.
+
+= Is the form secure? =
+
+Yes, it uses WordPress nonces, sanitization, and PGP encryption. Always keep WordPress updated.
+
+== Screenshots ==
+
+1. Admin settings page for key configuration.
+2. Frontend contact form in action.
+
+== Changelog ==
+
+= 1.0.0 =
+* Initial release with full PGP encryption support for contact forms.
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+Initial version. No upgrades needed.

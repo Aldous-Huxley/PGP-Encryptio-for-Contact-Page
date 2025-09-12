@@ -1,0 +1,58 @@
+/* File: admin.css */
+/* Path: PGP-Encryption-for-Contact-Page/assets/css/admin.css */
+
+.pgp-contact-settings-wrap {
+    max-width: 800px;
+}
+
+.pgp-contact-settings-wrap .form-table th {
+    width: 200px;
+    vertical-align: top;
+}
+
+.pgp-contact-settings-wrap textarea.large-text {
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.pgp-contact-settings-wrap .description {
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+}
+
+.pgp-contact-settings-wrap .notice-error,
+.pgp-contact-settings-wrap .notice-success {
+    margin: 10px 0;
+}
+
+.pgp-contact-settings-wrap h2 {
+    color: #23282d;
+    margin-bottom: 20px;
+}
+
+/* Validation feedback styles */
+.pgp-contact-settings-wrap .form-table .pgp-key-invalid {
+    border-color: #dc3232 !important;
+    background-color: #ffebee;
+}
+
+.pgp-contact-settings-wrap .form-table .pgp-key-valid {
+    border-color: #46b450 !important;
+    background-color: #f0fff4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 782px) {
+    .pgp-contact-settings-wrap .form-table th {
+        width: 100%;
+        float: none;
+    }
+
+    .pgp-contact-settings-wrap .form-table td {
+        display: block;
+        width: 100%;
+    }
+}
