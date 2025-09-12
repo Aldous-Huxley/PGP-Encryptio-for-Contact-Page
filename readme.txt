@@ -1,7 +1,7 @@
 === PGP Encryption for Contact Page ===
 Contributors: Robert Stanghellini
 Tags: pgp, encryption, contact form, security, email
-Requires at least: 6.0
+Requires at least: Wordpress 6.0
 Tested up to Wordpress: 6.8.2
 Requires PHP: 8.2
 Tested up to: 8.4
