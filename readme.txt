@@ -1,5 +1,6 @@
 === PGP Encryption for Contact Page ===
 Contributors: Robert Stanghellini
+Author URI: https://blockstreamtechnologies.llc
 Tags: pgp, encryption, contact form, security, email
 Requires at least: Wordpress 6.0
 Tested up to Wordpress: 6.8.2
