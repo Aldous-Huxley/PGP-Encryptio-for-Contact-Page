@@ -7,7 +7,7 @@ Tested up to Wordpress: 6.8.2
 Requires PHP: 8.2
 Tested up to: 8.4
 Stable tag: 1.0.0
-License: Apache License 2.0
+License: MIT License
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Adds PGP encryption to a built-in WordPress contact form, allowing secure email communication with public key encryption.
