@@ -9,94 +9,90 @@ if (!defined('ABSPATH')) {
 class PGP_ECP_Encryption {
     private $gpg;
     private $public_key;
+    private $fingerprint;
+
+    /**
+     * Check if debugging is enabled
+     * @return bool
+     */
+    private function is_debug_enabled() {
+        $options = get_option('pgp_ecp_options', []);
+        return defined('WP_DEBUG') && WP_DEBUG && isset($options['pgp_enable_debugging']) && $options['pgp_enable_debugging'];
+    }
 
     public function __construct() {
-        // Check if gnupg extension is available
-        if (!extension_loaded('gnupg')) {
-            error_log('PGP Encryption Error: GnuPG PHP extension is not enabled.');
-            throw new Exception('GnuPG PHP extension is required for PGP encryption.');
+        if ($this->is_debug_enabled()) {
+            error_log('PGP_ECP: PGP_ECP_Encryption constructor called');
         }
         $this->gpg = new gnupg();
-        $this->gpg->seterrormode(GNUPG_ERROR_EXCEPTION);
+        $options = get_option('pgp_ecp_options', []);
+        $this->public_key = $options['pgp_public_key'] ?? '';
+        $this->fingerprint = null; // Initialize fingerprint
     }
 
     /**
-     * Import the public key from options
-     * @return bool Success status
+     * Import the PGP public key
+     * @return bool
      */
     public function import_public_key() {
-        $options = get_option('pgp_ecp_options', []);
-        $public_key = sanitize_textarea_field($options['pgp_public_key'] ?? '');
-
-        if (empty($public_key)) {
-            error_log('PGP Key Import Error: No public key provided.');
+        if (empty($this->public_key)) {
+            error_log('PGP_ECP: No PGP public key set.');
             return false;
         }
 
+        // Skip if already imported
+        if ($this->fingerprint !== null) {
+            if ($this->is_debug_enabled()) {
+                error_log('PGP_ECP: PGP key already imported, skipping');
+            }
+            return true;
+        }
+
         try {
-            $import_result = $this->gpg->import($public_key);
-            if ($import_result && !empty($import_result['fingerprint'])) {
-                $this->public_key = $import_result['fingerprint'];
-                return true;
-            } else {
-                error_log('PGP Key Import Error: Invalid key format or no fingerprint. Import result: ' . print_r($import_result, true));
+            $import = $this->gpg->import($this->public_key);
+            if (!$import || empty($import['fingerprint'])) {
+                error_log('PGP_ECP: Failed to import PGP public key: Invalid key or import error.');
                 return false;
             }
+
+            $this->fingerprint = $import['fingerprint'];
+            if ($this->is_debug_enabled()) {
+                error_log('PGP_ECP: PGP key imported successfully, fingerprint: ' . $this->fingerprint);
+            }
+            return true;
         } catch (Exception $e) {
-            error_log('PGP Key Import Exception: ' . $e->getMessage());
+            error_log('PGP_ECP: PGP key import failed: ' . $e->getMessage());
             return false;
         }
     }
 
     /**
-     * Encrypt a message using the imported public key
-     * @param string $message The plaintext message to encrypt
-     * @return string|false Encrypted message or false on failure
+     * Encrypt the message
+     * @param string $message
+     * @return string|bool
      */
     public function encrypt_message($message) {
-        if (!$this->public_key || empty($message)) {
-            error_log('PGP Encryption Error: ' . (!$this->public_key ? 'No valid public key set.' : 'Empty message provided.'));
-            return false;
-        }
-
         try {
-            // Clear any previous keys
-            $this->gpg->clearencryptkeys();
-            // Add the encryption key
-            $this->gpg->addencryptkey($this->public_key);
-            // Encrypt the message
-            $encrypted = $this->gpg->encrypt($message);
-            if ($encrypted === false) {
-                error_log('PGP Encryption Error: Encryption failed with no output.');
+            if (!$this->fingerprint) {
+                error_log('PGP_ECP: No valid PGP key fingerprint available.');
                 return false;
+            }
+
+            $this->gpg->addencryptkey($this->fingerprint);
+            $encrypted = $this->gpg->encrypt($message);
+
+            if (!$encrypted) {
+                error_log('PGP_ECP: Message encryption failed: No encrypted data returned.');
+                return false;
+            }
+
+            if ($this->is_debug_enabled()) {
+                error_log('PGP_ECP: Message encrypted successfully');
             }
             return $encrypted;
         } catch (Exception $e) {
-            error_log('PGP Encryption Exception: ' . $e->getMessage() . ' in encrypt_message');
+            error_log('PGP_ECP: Message encryption failed: ' . $e->getMessage());
             return false;
         }
-    }
-
-    /**
-     * Get the armored public key for display or export
-     * @return string The armored public key
-     */
-    public function get_public_key() {
-        $options = get_option('pgp_ecp_options', []);
-        return sanitize_textarea_field($options['pgp_public_key'] ?? '');
-    }
-
-    /**
-     * Validate if the public key is properly set
-     * @return bool
-     */
-    public static function is_public_key_valid() {
-        $options = get_option('pgp_ecp_options', []);
-        $public_key = sanitize_textarea_field($options['pgp_public_key'] ?? '');
-        if (empty($public_key) || strpos($public_key, 'BEGIN PGP PUBLIC KEY BLOCK') === false) {
-            error_log('PGP Key Validation Error: ' . (empty($public_key) ? 'No public key set.' : 'Key does not contain BEGIN PGP PUBLIC KEY BLOCK.'));
-            return false;
-        }
-        return true;
     }
 }
