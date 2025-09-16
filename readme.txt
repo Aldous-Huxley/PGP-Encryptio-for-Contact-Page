@@ -63,7 +63,7 @@ Maybe, but unsupported. This is a standalone contact form. It has been tested wi
 The plugin will log errors and disable encryption. Contact your hosting provider to enable the `gnupg` PHP extension.
 
 = How do I get a PGP public key? =
-Generate one using tools like GnuPG (`gpg --gen-key`) or services like ProtonMail, then export it in armored format (`gpg --armor --export your-email@domain.com`) and paste it into the plugin’s admin settings.
+Generate one using tools like GnuPG (`gpg --gen-key`) or services like ProtonMail, then export it in armored format (`gpg --armor --export your-email @ domain.com`) and paste it into the plugin’s admin settings.
 
 = How do I enable debugging logs? =
 1. Ensure `define('WP_DEBUG', true);` and `define('WP_DEBUG_LOG', true);` are set in `wp-config.php`.
